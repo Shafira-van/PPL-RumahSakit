@@ -1,136 +1,92 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php
+include_once 'koneksi.php';
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+$rekam_medis = $_GET['rekam_medis'];
+$query = "SELECT * FROM pasien WHERE rekam_medis = '$rekam_medis'";
+$result = $koneksi->query($query);
+$row = $result->fetch_assoc();
+if (!$row) {
+  header("Location: index.php");
+}
 
-    <title>Sistem Rumah Sakit</title>
-  </head>
-  
-  <body>
-    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Rumah Sakit Cepat Sembuh</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-      </nav>
+echo $row['tanggal_registrasi'];
+?>
 
-      <h1 style="text-align: center;" : > Informasi Data Pasien Rumah Sakit </h1>
-      <div class="container">
-    <br>
-    <br>
-    <form class="form-horizontal" action="/action_page.php">
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="email">Nama:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="email" placeholder="Masukkan Nama">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="email">No Rekam Medis:</label>
-        <div class="col-sm-10">
-          <input type="number" class="form-control" id="email">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="email">Tanggal Lahir:</label>
-        <div class="col-sm-4">
-          <input type="date" class="form-control" id="email">
-        </div>
-        <label class="control-label col-sm-2" for="pwd">Umur:</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control" id="pwd" placeholder="Masukkan Umur">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="email">Jenis Kelamin:</label>
-        <div class="col-sm-10">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-          <label class="form-check-label" for="inlineCheckbox1" style="margin-right:1.1cm">Perempuan</label>
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-          <label class="form-check-label" for="inlineCheckbox2">Laki-Laki</label>
-        </div>
-      </div>
-      </div>
-      
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="pwd">Alamat:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="pwd" placeholder="Masukkan Umur">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="email">Status:</label>
-        <div class="col-sm-10">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1" style="margin-right:2cm">Kawin</label>
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-            <label class="form-check-label" for="inlineCheckbox2">Belum Kawin</label>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="pwd">Keluhan:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="pwd" placeholder="Masukkan Umur">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="pwd">Diagnosa Awal:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="pwd" placeholder="Masukkan Umur">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="pwd">Tanggal Registrasi:</label>
-        <div class="col-sm-10">
-          <input type="date" class="form-control" id="pwd" placeholder="Masukkan Umur">
-        </div>
-      </div>
-
+<a class="btn btn-secondary" href="index.php">← Kembali</a>
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label">Nama:</label>
+  <div class="col-sm-10">
+    <input type="text" disabled value="<?= $row['nama'] ?>" class="form-control" name="nama" id="email" placeholder="Masukkan Nama">
   </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-default">Submit</button>
-        </div>
-      </div>
-    </form>
+</div>
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label">No Rekam Medis:</label>
+  <div class="col-sm-10">
+    <input type="number" disabled value="<?= $row['rekam_medis'] ?>" placeholder="Nomor rekam medis" class="form-control" disabled value="<?= $nextPrimaryKey ?>" name="rekam_medis">
   </div>
+</div>
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label" for="tanggal_lahir">Tanggal Lahir:</label>
+  <div class="col-sm-10">
+    <input type="date" disabled value="<?= $row['tanggal_lahir'] ?>" class="form-control" name="tanggal_lahir" id="tanggal_lahir">
+  </div>
+</div>
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label" for="jenis_kelamin">Jenis Kelamin:</label>
+  <div class="col-sm-10">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" <?= $row['jenis_kelamin'] == 'Laki-Laki' ? 'checked' : '' ?> disabled type="radio" name="jenis_kelamin" value="Laki-Laki" id="jenis_kelamin">
+      <label class="form-check-label" for="jenis_kelamin1">
+        Laki-Laki
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" <?= $row['jenis_kelamin'] == 'Perempuan' ? 'checked' : '' ?> disabled type="radio" name="jenis_kelamin" id="jenis_kelamin">
+      <label class="form-check-label" for="jenis_kelamin">
+        Perempuan
+      </label>
+    </div>
+  </div>
+</div>
 
-      <style>
-      body {
-        font-size: 15px;
-        color: #343d44;
-        font-family: "segoe-ui", "open-sans", tahoma, arial;
-        padding: 0;
-        margin: 0;
-      }
-      
-      h1 {
-        margin: 25px auto 0;
-        text-align: center;
-        text-transform: uppercase;
-        font-size: 17px;
-      }
-
-      </style>
-       <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
--->
-</body>
-</html>
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label" for="alamat">Alamat:</label>
+  <div class="col-sm-10">
+    <input type="text" disabled value="<?= $row['alamat'] ?>" class="form-control" name="alamat" id="alamat" placeholder="Masukkan Alamat">
+  </div>
+</div>
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label" for="status">Status:</label>
+  <div class="col-sm-10">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" <?= $row['status'] == 'Kawin' ? 'checked' : '' ?> disabled type="radio" name="status" value="Kawin" id="status">
+      <label class="form-check-label" for="status">
+        Kawin
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" <?= $row['status'] == 'Belum Kawin' ? 'checked' : '' ?> disabled type="radio" name="status" value="Belum Kawin" id="status">
+      <label class="form-check-label" for="status">
+        Belum Kawin
+      </label>
+    </div>
+  </div>
+</div>
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label" for="keluhan">Keluhan:</label>
+  <div class="col-sm-10">
+    <input type="text" disabled value="<?= $row['keluhan'] ?>" class="form-control" name="keluhan" id="keluhan" placeholder="Masukkan Keluhan">
+  </div>
+</div>
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label" for="diagnosa_awal">Diagnosa Awal:</label>
+  <div class="col-sm-10">
+    <input type="text" disabled value="<?= $row['diagnosa_awal'] ?>" class="form-control" id="diagnosa_awal" name="diagnosa_awal" placeholder="Masukkan Diagnosa Awal">
+  </div>
+</div>
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label" for="tanggal_registrasi">Tanggal Registrasi:</label>
+  <div class="col-sm-10">
+    <input type="date" disabled value="<?= $row['tanggal_regis'] ?>" class="form-control" id="tanggal_registrasi" placeholder="Masukkan Tanggal registrasi">
+  </div>
+</div>
