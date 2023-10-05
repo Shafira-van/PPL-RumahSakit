@@ -52,8 +52,8 @@
                         <td><?php echo $d['tanggal_regis']; ?></td>
                         <td>
                             <div class="d-grid gap-1 d-md-block">
-                                <a class="btn btn-primary btn-sm" type="button" href="index.php?page=view&rekam_medis=<?= $d['rekam_medis'] ?>">View</a>
-                                <a href="hapus.php?rekam_medis=<?php echo $d['rekam_medis']; ?>" <button onclick="" class="btn btn-danger btn-sm" type="button">Delete</a>
+                                <a class="btn btn-primary btn-sm" type="button" href="index.php?page=view&rekam_medis=<?= $d['rekam_medis'] ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <a href="hapus.php?rekam_medis=<?php echo $d['rekam_medis']; ?>" <button onclick="" class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
                             </div>
                         </td>
                     </tr>
