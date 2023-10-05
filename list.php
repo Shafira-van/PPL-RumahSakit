@@ -21,10 +21,22 @@
                 </tr>
             </thead>
             <?php
+            function calculateAge($birthDate)
+            {
+                $birthDateTime = new DateTime($birthDate);
+                $currentDate = new DateTime();
+
+                $interval = $birthDateTime->diff($currentDate);
+
+                // Return the age
+                return $interval->y;
+            }
+
             include_once 'koneksi.php';
             $no = 1;
             $data = mysqli_query($koneksi, "select * from pasien");
             while ($d = mysqli_fetch_array($data)) {
+                $d['umur'] = calculateAge($d['tanggal_lahir']);
             ?>
                 <tbody>
                     <tr>
