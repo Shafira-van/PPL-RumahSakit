@@ -87,9 +87,9 @@ if ($result) {
     </div>
   </div>
   <div class="row mb-3">
-    <label class="col-sm-2 col-form-label" for="tanggal_registrasi">Tanggal Registrasi:</label>
+    <label class="col-sm-2 col-form-label" for="tanggal_regis">Tanggal Registrasi:</label>
     <div class="col-sm-10">
-      <input type="date" class="form-control" id="tanggal_regis" value="<?= date('Y-m-d') ?>" placeholder="Masukkan Tanggal registrasi">
+      <input type="date" class="form-control" id="tanggal_regis" value="<?= date('Y-m-d') ?>" name="tanggal_regis" placeholder="Masukkan Tanggal registrasi">
     </div>
   </div>
   <div class="row mb-3 mt-3">

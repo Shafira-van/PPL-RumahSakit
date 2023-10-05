@@ -9,7 +9,18 @@ if (!$row) {
   header("Location: index.php");
 }
 
-echo $row['tanggal_registrasi'];
+function calculateAge($birthDate)
+{
+  $birthDateTime = new DateTime($birthDate);
+  $currentDate = new DateTime();
+
+  $interval = $birthDateTime->diff($currentDate);
+
+  // Return the age
+  return $interval->y;
+}
+
+$row['umur'] = calculateAge($row['tanggal_lahir']);
 ?>
 
 <a class="btn btn-secondary" href="index.php">← Kembali</a>
@@ -29,6 +40,12 @@ echo $row['tanggal_registrasi'];
   <label class="col-sm-2 col-form-label" for="tanggal_lahir">Tanggal Lahir:</label>
   <div class="col-sm-10">
     <input type="date" disabled value="<?= $row['tanggal_lahir'] ?>" class="form-control" name="tanggal_lahir" id="tanggal_lahir">
+  </div>
+</div>
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label" for="umur">Umur:</label>
+  <div class="col-sm-10">
+    <input type="number" disabled value="<?= $row['umur'] ?>" class="form-control" name="umur" id="umur">
   </div>
 </div>
 <div class="row mb-3">
